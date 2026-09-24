@@ -1,23 +1,42 @@
 # PingFix
 
-PingFix is a **client-side, non-cheat Fabric mod for Minecraft Java 1.21.11**.
+**Created by arsham.** PingFix is a client-side, fair-play Fabric mod for **Minecraft Java 1.21.11**.
 
-It hardens the selected-hotbar-slot synchronization path used by scroll input, number keys,
-inventory/container interactions, item use, attacks, block breaking, and block placement:
+It makes rapid hotbar and inventory switching more dependable without automating gameplay or
+altering server authority. The mod keeps vanilla's selected-slot packet path intact while
+hardening stale client cache handling around corrections, inventory updates, and player/world
+lifecycle changes.
 
-- accepts server `UpdateSelectedSlotS2CPacket` corrections as authoritative;
-- keeps vanilla's send-side selection cursor intact after a correction, so a newer packet already
-  in flight cannot be falsely acknowledged or lost under bidirectional latency;
-- clears the cached selected tool on selected-slot, full inventory, container-slot, and held-stack
-  corrections so active breaking re-evaluates the actual held stack instead of continuing with a
-  stale item;
-- invalidates stale local cache at player/world/network-manager replacement boundaries and directly
-  at respawn/dimension replacement, without retaining old world or item references;
-- retains vanilla packet generation and ordering. It adds no custom packets, retries, timers,
-  background threads, automation, or gameplay advantage.
+## Reliability coverage
 
-The project is pinned to Minecraft **1.21.11**, Yarn **1.21.11+build.4**, Fabric Loader
-**0.19.5**, and Fabric API **0.141.6+1.21.11**. Java 21 is required to build and run it.
+- rapid number-key, scroll-wheel, and repeated same-slot selection;
+- attacks, item use, placement, and block breaking while switching;
+- selected-slot corrections and delayed bidirectional network traffic;
+- player-inventory, container-slot, and full-inventory server revisions;
+- reconnects, respawns, dimension/world transfers, and chunk/loading transitions;
+- stale selected-tool cleanup without repeatedly invalidating an unchanged held item.
+
+## Fair-play and server-safety audit
+
+PingFix is deliberately limited to client consistency work:
+
+- **does not create, send, cancel, delay, reorder, replay, or spoof packets;**
+- **does not automate input, movement, combat, clicks, placement, or inventory actions;**
+- **does not alter reach, attack timing, cooldowns, player movement, game rules, or server data;**
+- runs only on the normal client thread, with no timers, worker threads, packet queues, or retry
+  loops;
+- observes authoritative server packets only after vanilla has handled them and preserves
+  vanilla's send-side selected-slot cursor under latency.
+
+It is designed as a normal client-side stability/QoL mod rather than a cheat. Individual servers
+can still enforce their own mod policies, so always follow the rules of the server you play on.
+
+## Requirements
+
+- Minecraft Java Edition **1.21.11**
+- Fabric Loader **0.19.5 or newer**
+- Fabric API compatible with **1.21.11**
+- Java **21**
 
 ## Build
 
@@ -25,4 +44,4 @@ The project is pinned to Minecraft **1.21.11**, Yarn **1.21.11+build.4**, Fabric
 ./gradlew clean check build
 ```
 
-The remapped installable mod JAR is written to `build/libs/PingFix-1.0.0+1.21.11.jar`.
+The verified remapped mod JAR is emitted in `build/libs/`.

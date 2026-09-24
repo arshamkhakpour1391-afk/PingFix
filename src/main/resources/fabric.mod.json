@@ -3,9 +3,9 @@
   "id": "pingfix",
   "version": "${version}",
   "name": "PingFix",
-  "description": "Client-side selected-slot synchronization and stale cache correction for rapid inventory switching.",
+  "description": "Protocol-safe client-side synchronization hardening for reliable rapid hotbar and inventory switching. Preserves vanilla authority, input, timing, and packet ordering.",
   "authors": [
-    "arshamkhakpour1391-afk"
+    "arsham"
   ],
   "contact": {
     "sources": "https://github.com/arshamkhakpour1391-afk/PingFix"
@@ -25,5 +25,6 @@
     "minecraft": "~1.21.11",
     "java": ">=21",
     "fabric-api": "*"
-  }
+  },
+  "icon": "assets/pingfix/icon.png"
 }
