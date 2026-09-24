@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "pingfix",
+  "version": "${version}",
+  "name": "PingFix",
+  "description": "Client-side selected-slot synchronization and stale cache correction for rapid inventory switching.",
+  "authors": [
+    "arshamkhakpour1391-afk"
+  ],
+  "contact": {
+    "sources": "https://github.com/arshamkhakpour1391-afk/PingFix"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "io.github.arshamkhakpour1391.pingfix.client.PingFixClient"
+    ]
+  },
+  "mixins": [
+    "pingfix.client.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
