@@ -1,0 +1,6 @@
+# JitPack builds the same verified remapped JAR exposed by the direct download link.
+before_install:
+  - sdk install java 21.0.2-open
+  - sdk use java 21.0.2-open
+install:
+  - ./gradlew --no-daemon clean check -Pversion=$VERSION publishToMavenLocal
