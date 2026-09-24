@@ -8,10 +8,11 @@ inventory/container interactions, item use, attacks, block breaking, and block p
 - accepts server `UpdateSelectedSlotS2CPacket` corrections as authoritative;
 - keeps vanilla's send-side selection cursor intact after a correction, so a newer packet already
   in flight cannot be falsely acknowledged or lost under bidirectional latency;
-- clears the cached selected tool on selected-slot and held-stack corrections so active breaking
-  re-evaluates the actual held stack instead of continuing with a stale item;
-- invalidates stale local cache only when the player, world, network handler, or interaction
-  manager is replaced (disconnect, reconnect, respawn, transfer, or dimension/world transition);
+- clears the cached selected tool on selected-slot, full inventory, container-slot, and held-stack
+  corrections so active breaking re-evaluates the actual held stack instead of continuing with a
+  stale item;
+- invalidates stale local cache at player/world/network-manager replacement boundaries and directly
+  at respawn/dimension replacement, without retaining old world or item references;
 - retains vanilla packet generation and ordering. It adds no custom packets, retries, timers,
   background threads, automation, or gameplay advantage.
 

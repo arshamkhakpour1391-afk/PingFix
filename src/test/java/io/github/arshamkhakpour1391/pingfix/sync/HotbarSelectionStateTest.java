@@ -43,6 +43,25 @@ class HotbarSelectionStateTest {
     }
 
     @Test
+    void lateCorrectionDoesNotPreventTheNextLocalSelectionFromBeingObserved() {
+        HotbarSelectionState state = new HotbarSelectionState();
+        state.beginSession(0);
+        state.observeLocalSlot(6);
+        state.observeVanillaSyncBarrier(6);
+
+        // Model a server correction arriving while a newer local selection is in flight.
+        state.observeAuthoritativeSlot(2);
+        long correctionRevision = state.revision();
+
+        assertTrue(state.observeLocalSlot(6));
+        assertTrue(state.observeVanillaSyncBarrier(6));
+        assertEquals(6, state.localSlot());
+        assertEquals(2, state.authoritativeSlot());
+        assertEquals(6, state.lastSyncBarrierSlot());
+        assertTrue(state.revision() > correctionRevision);
+    }
+
+    @Test
     void disconnectClearsEverySlotReferenceAndNextConnectionGetsANewSession() {
         HotbarSelectionState state = new HotbarSelectionState();
         state.beginSession(8);

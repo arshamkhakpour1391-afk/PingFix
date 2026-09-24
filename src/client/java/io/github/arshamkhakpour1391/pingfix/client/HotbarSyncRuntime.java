@@ -108,7 +108,7 @@ public final class HotbarSyncRuntime {
         }
 
         MinecraftClient client = MinecraftClient.getInstance();
-        if (!client.isOnThread() || client.getNetworkHandler() != source || client.player == null) {
+        if (!isCurrentClientHandler(client, source) || client.player == null) {
             return;
         }
 
@@ -119,12 +119,9 @@ public final class HotbarSyncRuntime {
         }
 
         state.observeAuthoritativeSlot(selectedSlot);
-        ClientPlayerInteractionManager manager = client.interactionManager;
-        if (manager instanceof SelectedSlotCacheAccess cacheAccess) {
-            // Clear only the held-tool snapshot. Do not overwrite vanilla's send-side cursor;
-            // it may describe a newer outbound selection that the server has not processed yet.
-            cacheAccess.pingfix$refreshSelectedStack();
-        }
+        // Clear only the held-tool snapshot. Do not overwrite vanilla's send-side cursor;
+        // it may describe a newer outbound selection that the server has not processed yet.
+        refreshSelectedStack(client.interactionManager);
     }
 
     /** Refreshes the held-tool snapshot after an authoritative update to a hotbar inventory slot. */
@@ -134,14 +131,54 @@ public final class HotbarSyncRuntime {
         }
 
         MinecraftClient client = MinecraftClient.getInstance();
-        if (!client.isOnThread() || client.getNetworkHandler() != source || client.player == null) {
+        if (!isCurrentClientHandler(client, source) || client.player == null) {
             return;
         }
         if (client.player.getInventory().getSelectedSlot() != inventorySlot) {
             return;
         }
 
-        ClientPlayerInteractionManager manager = client.interactionManager;
+        refreshSelectedStack(client.interactionManager);
+    }
+
+    /**
+     * A screen-handler update has already been applied by vanilla. Its slot index is handler
+     * relative, so inferring a player-inventory index here is error-prone for containers and
+     * mounts. Invalidating only the transient tool snapshot is safe and avoids a stale held
+     * stack after any authoritative inventory revision.
+     */
+    public void onAuthoritativeInventoryRevision(ClientPlayNetworkHandler source) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (!isCurrentClientHandler(client, source)) {
+            return;
+        }
+
+        refreshSelectedStack(client.interactionManager);
+    }
+
+    /** Clears stale references as soon as vanilla completes a respawn/dimension replacement. */
+    public void onPlayerLifecycleTransition(ClientPlayNetworkHandler source) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (!isCurrentClientHandler(client, source)) {
+            return;
+        }
+
+        // Do not retain references from the old player/world. The next end-of-tick pass creates
+        // a fresh context; invalidating now protects interactions occurring in the transition tick.
+        player = null;
+        world = null;
+        networkHandler = null;
+        interactionManager = null;
+        hasContext = false;
+        state.endSession();
+        invalidateVanillaCache(client.interactionManager);
+    }
+
+    private boolean isCurrentClientHandler(MinecraftClient client, ClientPlayNetworkHandler source) {
+        return client.isOnThread() && client.getNetworkHandler() == source;
+    }
+
+    private void refreshSelectedStack(ClientPlayerInteractionManager manager) {
         if (manager instanceof SelectedSlotCacheAccess cacheAccess) {
             cacheAccess.pingfix$refreshSelectedStack();
         }

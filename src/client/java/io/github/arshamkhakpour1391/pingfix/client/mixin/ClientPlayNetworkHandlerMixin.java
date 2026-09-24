@@ -2,6 +2,9 @@ package io.github.arshamkhakpour1391.pingfix.client.mixin;
 
 import io.github.arshamkhakpour1391.pingfix.client.HotbarSyncRuntime;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.network.packet.s2c.play.InventoryS2CPacket;
+import net.minecraft.network.packet.s2c.play.PlayerRespawnS2CPacket;
+import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.SetPlayerInventoryS2CPacket;
 import net.minecraft.network.packet.s2c.play.UpdateSelectedSlotS2CPacket;
 import org.spongepowered.asm.mixin.Mixin;
@@ -9,7 +12,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** Applies authoritative held-slot and held-stack updates only after vanilla packet handling. */
+/**
+ * Observes only the completion of vanilla's authoritative packet handlers. It never cancels,
+ * changes, queues, or sends packets; vanilla remains the single source of packet ordering.
+ */
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin {
     @Inject(method = "onUpdateSelectedSlot", at = @At("TAIL"))
@@ -23,5 +29,20 @@ public abstract class ClientPlayNetworkHandlerMixin {
                 (ClientPlayNetworkHandler) (Object) this,
                 packet.slot()
         );
+    }
+
+    @Inject(method = "onScreenHandlerSlotUpdate", at = @At("TAIL"))
+    private void pingfix$refreshAfterSlotRevision(ScreenHandlerSlotUpdateS2CPacket packet, CallbackInfo ci) {
+        HotbarSyncRuntime.getInstance().onAuthoritativeInventoryRevision((ClientPlayNetworkHandler) (Object) this);
+    }
+
+    @Inject(method = "onInventory", at = @At("TAIL"))
+    private void pingfix$refreshAfterFullInventoryRevision(InventoryS2CPacket packet, CallbackInfo ci) {
+        HotbarSyncRuntime.getInstance().onAuthoritativeInventoryRevision((ClientPlayNetworkHandler) (Object) this);
+    }
+
+    @Inject(method = "onPlayerRespawn", at = @At("TAIL"))
+    private void pingfix$resetAfterPlayerReplacement(PlayerRespawnS2CPacket packet, CallbackInfo ci) {
+        HotbarSyncRuntime.getInstance().onPlayerLifecycleTransition((ClientPlayNetworkHandler) (Object) this);
     }
 }
