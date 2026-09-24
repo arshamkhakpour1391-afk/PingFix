@@ -121,7 +121,7 @@ public final class HotbarSyncRuntime {
         state.observeAuthoritativeSlot(selectedSlot);
         // Clear only the held-tool snapshot. Do not overwrite vanilla's send-side cursor;
         // it may describe a newer outbound selection that the server has not processed yet.
-        refreshSelectedStack(client.interactionManager);
+        refreshSelectedStack(client.interactionManager, client.player);
     }
 
     /** Refreshes the held-tool snapshot after an authoritative update to a hotbar inventory slot. */
@@ -138,7 +138,7 @@ public final class HotbarSyncRuntime {
             return;
         }
 
-        refreshSelectedStack(client.interactionManager);
+        refreshSelectedStack(client.interactionManager, client.player);
     }
 
     /**
@@ -153,7 +153,7 @@ public final class HotbarSyncRuntime {
             return;
         }
 
-        refreshSelectedStack(client.interactionManager);
+        refreshSelectedStack(client.interactionManager, client.player);
     }
 
     /** Clears stale references as soon as vanilla completes a respawn/dimension replacement. */
@@ -178,9 +178,9 @@ public final class HotbarSyncRuntime {
         return client.isOnThread() && client.getNetworkHandler() == source;
     }
 
-    private void refreshSelectedStack(ClientPlayerInteractionManager manager) {
+    private void refreshSelectedStack(ClientPlayerInteractionManager manager, ClientPlayerEntity currentPlayer) {
         if (manager instanceof SelectedSlotCacheAccess cacheAccess) {
-            cacheAccess.pingfix$refreshSelectedStack();
+            cacheAccess.pingfix$refreshSelectedStackIfStale(currentPlayer.getMainHandStack());
         }
     }
 

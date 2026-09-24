@@ -31,13 +31,16 @@ public abstract class ClientPlayerInteractionManagerMixin implements SelectedSlo
     public void pingfix$invalidateSelectedSlotCache() {
         // -1 is outside vanilla's valid [0, 8] range and forces the next normal vanilla sync.
         lastSelectedSlot = HotbarSelectionState.NO_SLOT;
-        refreshSelectedStack();
+        // A context replacement must never retain an old world/player stack reference.
+        selectedStack = ItemStack.EMPTY;
     }
 
     @Override
-    public void pingfix$refreshSelectedStack() {
-        // Do not retain an ItemStack reference across a correction or player/world transition.
-        // The next vanilla break tick compares the actual held stack and restarts safely if needed.
-        selectedStack = ItemStack.EMPTY;
+    public void pingfix$refreshSelectedStackIfStale(ItemStack currentMainHandStack) {
+        // Screen-handler packets often update unrelated slots. Preserve vanilla's fast breaking
+        // path when the held stack is unchanged; reset only when item or components changed.
+        if (selectedStack == null || !ItemStack.areItemsAndComponentsEqual(selectedStack, currentMainHandStack)) {
+            selectedStack = ItemStack.EMPTY;
+        }
     }
 }
