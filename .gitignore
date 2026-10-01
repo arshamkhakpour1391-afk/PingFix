@@ -1,0 +1,11 @@
+/.cache/
+/.runtime/
+/.arena*
+/node_modules/
+/artifacts/
+*.log
+.DS_Store
+
+__pycache__/
+
+*.pyc

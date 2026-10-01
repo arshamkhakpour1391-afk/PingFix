@@ -1,0 +1,249 @@
+# Interface strings only; no business data. GPL-3.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: hamrah-shop 1.0.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fa_IR\n"
+
+#: includes/class-frontend.php:53
+msgid "%s کالا در سبد"
+msgstr ""
+
+#: includes/class-installer.php:53
+msgid "آماده‌سازی برگه‌ها"
+msgstr ""
+
+#: includes/class-frontend.php:29
+msgid "ارتباط برقرار نشد. دوباره تلاش کنید."
+msgstr ""
+
+#: includes/class-catalog.php:111
+msgid "ارزان‌ترین"
+msgstr ""
+
+#: templates/filters.php:32
+msgid "از"
+msgstr ""
+
+#: includes/class-frontend.php:35
+msgid "از علاقه‌مندی‌ها حذف شد."
+msgstr ""
+
+#: includes/class-wishlist.php:18
+msgid "افزودن %s به علاقه‌مندی‌ها"
+msgstr ""
+
+#: includes/class-catalog.php:193
+msgid "این فیلتر در دسترس نیست."
+msgstr ""
+
+#: includes/class-installer.php:58
+msgid "بازسازی نمایهٔ جستجو"
+msgstr ""
+
+#: includes/class-frontend.php:31
+msgid "برای محدود کردن گزینه‌ها، جستجوی دقیق‌تری بنویسید."
+msgstr ""
+
+#: templates/filters.php:25
+msgid "برای گزینه‌های بیشتر، جستجو کنید."
+msgstr ""
+
+#: includes/class-catalog.php:172
+msgid "برند"
+msgstr ""
+
+#: includes/class-installer.php:140
+msgid "بستهٔ زبان فارسی دریافت نشد."
+msgstr ""
+
+#: includes/class-frontend.php:35
+msgid "به علاقه‌مندی‌ها اضافه شد."
+msgstr ""
+
+#: templates/filters.php:33
+msgid "تا"
+msgstr ""
+
+#: includes/class-catalog.php:115
+msgid "تخفیف‌دارها اول"
+msgstr ""
+
+#: includes/class-frontend.php:37
+msgid "تصویر ثبت نشده"
+msgstr ""
+
+#: includes/class-frontend.php:34
+msgid "تلاش دوباره"
+msgstr ""
+
+#: includes/class-iran.php:27
+msgid "تومان"
+msgstr ""
+
+#: includes/class-iran.php:22
+msgid "تومان ایران"
+msgstr ""
+
+#: includes/class-catalog.php:110
+msgid "جدیدترین"
+msgstr ""
+
+#: templates/filters.php:16
+msgid "جستجو در %s"
+msgstr ""
+
+#: includes/class-installer.php:56
+msgid "جستجو فعال است؛ تکمیل نمایه در پس‌زمینه انجام می‌شود."
+msgstr ""
+
+#: templates/filters.php:16
+msgid "جستجوی گزینه‌ها"
+msgstr ""
+
+#: includes/class-frontend.php:39
+msgid "حداکثر ۱۰۰ محصول در علاقه‌مندی‌ها نگهداری می‌شود."
+msgstr ""
+
+#: includes/class-frontend.php:36
+msgid "حذف از علاقه‌مندی‌ها"
+msgstr ""
+
+#: templates/filters.php:47
+msgid "حذف همهٔ فیلترها"
+msgstr ""
+
+#: includes/class-frontend.php:33
+msgid "در حال حاضر محصول قابل نمایشی در فهرست شما نیست."
+msgstr ""
+
+#: includes/class-frontend.php:28
+msgid "در حال دریافت…"
+msgstr ""
+
+#: includes/class-catalog.php:195
+msgid "دریافت گزینه‌ها انجام نشد."
+msgstr ""
+
+#: includes/class-catalog.php:171
+msgid "دسته‌بندی"
+msgstr ""
+
+#: includes/class-settings.php:151
+msgid "ذخیرهٔ تنظیمات"
+msgstr ""
+
+#: includes/class-iran.php:27
+msgid "ریال"
+msgstr ""
+
+#: includes/class-installer.php:139
+msgid "ساخت برخی برگه‌ها انجام نشد."
+msgstr ""
+
+#: includes/class-iran.php:65
+msgid "شماره موبایل"
+msgstr ""
+
+#: includes/class-iran.php:122
+msgid "شماره موبایل ایران معتبر نیست."
+msgstr ""
+
+#: includes/class-iran.php:82
+msgid "شماره موبایل ایران معتبر نیست. شماره را با ۰۹ یا +۹۸ وارد کنید."
+msgstr ""
+
+#: includes/class-settings.php:67 includes/class-settings.php:67
+msgid "فروشگاه همراه"
+msgstr ""
+
+#: templates/filters.php:45
+msgid "فقط محصولات تخفیف‌دار"
+msgstr ""
+
+#: templates/filters.php:5 templates/filters.php:6
+msgid "فیلتر محصولات"
+msgstr ""
+
+#: templates/filters.php:39
+msgid "قابل پیش‌خرید"
+msgstr ""
+
+#: includes/class-catalog.php:113
+msgid "محبوب‌ترین"
+msgstr ""
+
+#: templates/filters.php:30 templates/filters.php:31
+msgid "محدودهٔ قیمت"
+msgstr ""
+
+#: includes/class-frontend.php:38
+msgid "مرورگر اجازهٔ ذخیرهٔ علاقه‌مندی‌ها را نمی‌دهد. تنظیمات حریم خصوصی مرورگر را بررسی کنید."
+msgstr ""
+
+#: includes/class-frontend.php:36
+msgid "مشاهدهٔ محصول"
+msgstr ""
+
+#: includes/class-support.php:69 templates/filters.php:39
+msgid "موجود"
+msgstr ""
+
+#: includes/class-catalog.php:114
+msgid "موجودها اول"
+msgstr ""
+
+#: includes/class-support.php:69 templates/filters.php:39
+msgid "ناموجود"
+msgstr ""
+
+#: includes/class-frontend.php:30
+msgid "نتایج به‌روز شد."
+msgstr ""
+
+#: includes/class-frontend.php:28
+msgid "نتیجه‌ای پیدا نشد."
+msgstr ""
+
+#: includes/class-installer.php:45
+msgid "نصب و فعال‌سازی قالب همراه"
+msgstr ""
+
+#: templates/filters.php:47
+msgid "نمایش نتایج"
+msgstr ""
+
+#: includes/class-installer.php:56
+msgid "نمایهٔ جستجو آماده است. تغییر محصولات به‌صورت خودکار ثبت می‌شود."
+msgstr ""
+
+#: includes/class-frontend.php:32
+msgid "هنوز محصولی به علاقه‌مندی‌ها اضافه نکرده‌اید."
+msgstr ""
+
+#: templates/filters.php:38 templates/filters.php:38
+msgid "وضعیت موجودی"
+msgstr ""
+
+#: templates/filters.php:6
+msgid "پاک کردن"
+msgstr ""
+
+#: includes/class-frontend.php:34
+msgid "پاک کردن فهرست"
+msgstr ""
+
+#: includes/class-iran.php:89 includes/class-iran.php:130
+msgid "کد پستی ایران باید ۱۰ رقم باشد."
+msgstr ""
+
+#: includes/class-catalog.php:112
+msgid "گران‌ترین"
+msgstr ""
+
+#: includes/class-frontend.php:30
+msgid "گزینه‌ای پیدا نشد."
+msgstr ""
+

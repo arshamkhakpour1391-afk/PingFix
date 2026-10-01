@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": { "contentSize": "860px", "wideSize": "1320px" },
+    "color": {
+      "palette": [
+        { "slug": "primary", "name": "رنگ اصلی", "color": "#047857" },
+        { "slug": "ink", "name": "متن", "color": "#172b29" },
+        { "slug": "muted", "name": "متن فرعی", "color": "#61736b" },
+        { "slug": "background", "name": "پس‌زمینه", "color": "#f5f7f6" },
+        { "slug": "surface", "name": "سطح کارت", "color": "#ffffff" }
+      ]
+    },
+    "spacing": { "units": ["px", "rem", "%", "vw", "vh"], "blockGap": true },
+    "typography": {
+      "fluid": true,
+      "fontFamilies": [{
+        "slug": "vazirmatn", "name": "وزیرمتن", "fontFamily": "Vazirmatn, Tahoma, Arial, sans-serif",
+        "fontFace": [
+          { "fontFamily": "Vazirmatn", "fontStyle": "normal", "fontWeight": "100 900", "src": ["file:./assets/fonts/vazirmatn-arabic-wght-normal.woff2"], "fontDisplay": "swap" },
+          { "fontFamily": "Vazirmatn", "fontStyle": "normal", "fontWeight": "100 900", "src": ["file:./assets/fonts/vazirmatn-latin-wght-normal.woff2"], "fontDisplay": "swap", "unicodeRange": "U+0000-00FF,U+0131,U+0152-0153,U+2000-206F" }
+        ]
+      }],
+      "fontSizes": [
+        { "slug": "small", "name": "کوچک", "size": "0.85rem" },
+        { "slug": "medium", "name": "متن", "size": "1rem" },
+        { "slug": "large", "name": "عنوان", "size": "1.65rem" },
+        { "slug": "x-large", "name": "عنوان بزرگ", "size": "2.35rem" }
+      ]
+    }
+  },
+  "styles": {
+    "typography": { "fontFamily": "var:preset|font-family|vazirmatn", "lineHeight": "1.9" },
+    "elements": { "button": { "border": { "radius": "10px" } } }
+  }
+}

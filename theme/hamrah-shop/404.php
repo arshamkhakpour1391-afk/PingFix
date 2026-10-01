@@ -1,0 +1,3 @@
+<?php if ( ! defined( 'ABSPATH' ) ) { exit; } get_header(); ?>
+<main id="main-content" class="hs-container hs-main" tabindex="-1"><section class="hs-empty"><h1><?php esc_html_e( 'این صفحه پیدا نشد', 'hamrah-shop-theme' ); ?></h1><p><?php esc_html_e( 'نشانی را بررسی کنید یا از جستجو استفاده کنید.', 'hamrah-shop-theme' ); ?></p><?php if ( hs_theme_has_woo() ) { hs_theme_search( 'not-found' ); } else { get_search_form(); } ?><a class="hs-text-link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'بازگشت به خانه', 'hamrah-shop-theme' ); ?></a></section></main>
+<?php get_footer(); ?>
